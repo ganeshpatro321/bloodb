@@ -12,15 +12,15 @@
         </div>
         <div class="form-group">
           <label>Age</label>
-          <input type="text" name="age" style="text-align:center" class="form-control" required>
+          <input type="number" name="age" min="18" max="60" placeholder="18–60" style="text-align:center" class="form-control" required>
         </div>
         <div class="form-group">
           <label>Phone Number</label>
-          <input type="text" name="number" style="text-align:center" class="form-control" required>
+          <input type="tel" name="number" pattern="[0-9]{10}" placeholder="10-digit number" style="text-align:center" class="form-control" required>
         </div>
         <div class="form-group">
           <label>Email</label>
-          <input type="text" name="email" style="text-align:center" class="form-control" required>
+          <input type="email" name="email" style="text-align:center" class="form-control" required>
         </div>
         <div class="form-group">
           <label>Place</label>
@@ -28,11 +28,26 @@
         </div>
         <div class="form-group">
           <label>Gender</label>
-          <input type="text" name="gender" style="text-align:center" class="form-control" required>
+          <select name="gender" class="form-control" required>
+            <option value="">-- Select --</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
         </div>
         <div class="form-group">
           <label>Blood Group</label>
-          <input type="text" name="bgroup" style="text-align:center" class="form-control" required>
+          <select name="bgroup" class="form-control" required>
+            <option value="">-- Select --</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+          </select>
         </div>
 
         <div class="form-group text-right">
