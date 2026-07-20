@@ -67,13 +67,20 @@ test('conUser saves contact details, renders success, and sends both emails', ()
     '@sendgrid/mail': sendGrid
   });
   const request = {
-    body: { name: 'Asha', email: 'asha@example.com', message: 'Please contact me.' }
+    body: {
+      name: 'Asha', email: 'asha@example.com', message: 'Please contact me.',
+      internalNote: 'Do not persist this request-only field'
+    }
   };
   const response = createResponse();
 
   conUser(request, response);
 
-  assert.deepEqual(savedContacts, [request.body]);
+  assert.deepEqual(savedContacts, [{
+    name: 'Asha',
+    email: 'asha@example.com',
+    message: 'Please contact me.'
+  }]);
   assert.deepEqual(response.renderCalls, [{ view: './pages/contactSuccess', locals: undefined }]);
   assert.equal(sendGrid.apiKey, process.env.API_KEY);
   assert.deepEqual(sentMessages, [
@@ -139,14 +146,24 @@ test('donUser saves donor details, renders success, and sends confirmation email
   const request = {
     body: {
       fname: 'Sam', lname: 'Lee', age: 28, number: 5551234,
-      email: 'sam@example.com', place: 'Boston', gender: 'male', bgroup: 'O+'
+      email: 'sam@example.com', place: 'Boston', gender: 'male', bgroup: 'O+',
+      isVerified: true
     }
   };
   const response = createResponse();
 
   donUser(request, response);
 
-  assert.deepEqual(savedDonors, [request.body]);
+  assert.deepEqual(savedDonors, [{
+    fname: 'Sam',
+    lname: 'Lee',
+    age: 28,
+    number: 5551234,
+    email: 'sam@example.com',
+    place: 'Boston',
+    gender: 'male',
+    bgroup: 'O+'
+  }]);
   assert.deepEqual(response.renderCalls, [{ view: './pages/success', locals: undefined }]);
   assert.equal(sentMessages.length, 2);
   assert.equal(sentMessages[0].to, 'bloodb@gmail.com');
@@ -157,6 +174,34 @@ test('donUser saves donor details, renders success, and sends confirmation email
     subject: 'Thank You',
     text: 'Hello,Sam Lee . Thanks for saving a life!, We will contact you in need!'
   });
+});
+
+test('donUser returns a persistence error as JSON without rendering success', () => {
+  const saveError = new Error('donor database unavailable');
+  const sendGrid = { setApiKey() {}, send() {} };
+
+  class Donor {
+    save(callback) {
+      callback(saveError);
+    }
+  }
+
+  const { donUser } = loadController('donres', {
+    mongoose: {},
+    '../models/donors': Donor,
+    '@sendgrid/mail': sendGrid
+  });
+  const response = createResponse();
+
+  donUser({
+    body: {
+      fname: 'Sam', lname: 'Lee', age: 28, number: 5551234,
+      email: 'sam@example.com', place: 'Boston', gender: 'male', bgroup: 'O+'
+    }
+  }, response);
+
+  assert.deepEqual(response.jsonCalls, [saveError]);
+  assert.deepEqual(response.renderCalls, []);
 });
 
 test('showData searches donors by requested blood group and place', () => {
@@ -198,5 +243,32 @@ test('showData skips the donor search when no blood group is provided', () => {
 
   showData({ body: { bgr: '', place: 'Boston' } }, response);
 
+  assert.deepEqual(response.renderCalls, []);
+});
+
+test('showData propagates donor search errors without rendering results', () => {
+  const queryError = new Error('search failed');
+  const model = {
+    find() {
+      return {
+        select() {
+          return this;
+        },
+        exec(callback) {
+          callback(queryError);
+        }
+      };
+    }
+  };
+  const { showData } = loadController('needres', {
+    mongoose: {},
+    '../models/donors': model
+  });
+  const response = createResponse();
+
+  assert.throws(
+    () => showData({ body: { bgr: 'O+', place: 'Boston' } }, response),
+    queryError
+  );
   assert.deepEqual(response.renderCalls, []);
 });
