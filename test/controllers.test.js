@@ -187,3 +187,24 @@ test('showData does not query when no blood group is provided', function() {
 
   assert.equal(queried, false);
 });
+
+test('showData propagates donor query errors', function() {
+  var error = new Error('query failed');
+  var controller = loadController('../controller/needres', {
+    mongoose: {},
+    '../models/donors': {
+      find: function() {
+        return {
+          select: function() {},
+          exec: function(callback) { callback(error); }
+        };
+      }
+    }
+  });
+
+  assert.throws(function() {
+    controller.showData({ body: { bgr: 'AB+', place: 'Mumbai' } }, {
+      render: function() { assert.fail('did not expect results to render'); }
+    });
+  }, error);
+});
