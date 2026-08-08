@@ -9,7 +9,7 @@ var donSchema = new Schema({
   email : { type : String, required : true},
   place : { type : String, required : true },
   gender : { type : String, required : true, min:1 },
-  bgroup : { type : String, required : true, max:3 }
+  bgroup : { type : String, required : true, maxlength:3 }
 });
 
 var donModel = mongoose.model('don', donSchema );
