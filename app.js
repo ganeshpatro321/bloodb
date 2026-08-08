@@ -25,8 +25,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 // mongoose connection
-mongoose.connect('mongodb://localhost:27017/bloodb',{
-  useMongoClient: true
+mongoose.connect('mongodb://localhost:27017/bloodb', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
 });
 
 var db = mongoose.connection;

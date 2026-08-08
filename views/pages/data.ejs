@@ -1,24 +1,46 @@
-<table width="1000px" align="center" class="thetab">
-      <tr class="thetabcol">
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Age</th>
-        <th>Phone Number</th>
-        <th>Email</th>
-        <th>Place</th>
-        <th>Gender</th>
-        <th>Bgroup</th>
-      </tr>
-      <% for(var i=0; i < users.length; i++) { %>
-      <tr>
-        <td><%= users[i].fname %></td>
-       <td><%= users[i].lname %></td>
-       <td><%= users[i].age %></td>
-       <td><%= users[i].number %></td>
-       <td><%= users[i].email %></td>
-       <td style="background-color: #33FF3F;"><%= users[i].place %></td>
-       <td><%= users[i].gender %></td>
-       <td class="grp"><%= users[i].bgroup %></td>
-      </tr>
-      <% } %>
-    </table>
+<div class="container" style="padding-top:20px; padding-bottom:30px;">
+  <% if (users.length === 0) { %>
+    <div class="alert alert-warning text-center" style="font-size:18px;">
+      <strong>No donors found</strong> for blood group <strong><%= bgr %></strong> in <strong><%= place %></strong>.
+      <br><br>
+      <a href="/need" class="btn btn-primary">Search Again</a>
+    </div>
+  <% } else { %>
+    <p style="font-size:16px; margin-bottom:15px;">
+      Found <strong><%= users.length %></strong> donor(s) with blood group <strong><%= bgr %></strong> in <strong><%= place %></strong>.
+    </p>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover thetab">
+        <thead>
+          <tr class="thetabcol">
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Age</th>
+            <th>Phone Number</th>
+            <th>Email</th>
+            <th>Place</th>
+            <th>Gender</th>
+            <th>Blood Group</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(var i = 0; i < users.length; i++) { %>
+          <tr>
+            <td><%= users[i].fname %></td>
+            <td><%= users[i].lname %></td>
+            <td><%= users[i].age %></td>
+            <td><%= users[i].number %></td>
+            <td><%= users[i].email %></td>
+            <td style="background-color:#33FF3F;"><%= users[i].place %></td>
+            <td><%= users[i].gender %></td>
+            <td class="grp"><%= users[i].bgroup %></td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+    <div class="text-center" style="margin-top:20px;">
+      <a href="/need" class="btn btn-default">Search Again</a>
+    </div>
+  <% } %>
+</div>
