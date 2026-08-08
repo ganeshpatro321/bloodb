@@ -5,7 +5,8 @@
   "scripts": {
     "test": "node --test",
     "start": "nodemon ./bin/www",
-    "devstart":"nodemon ./bin/www"
+    "devstart": "nodemon ./bin/www",
+    "test": "node --test"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
