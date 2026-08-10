@@ -2,7 +2,7 @@
 <section class="content-page2">
   <div class="container">
     <%- include header.ejs %>
-      <div class="col-md-6 col-lg-6 col-sm-6" style="background-color:yellow">
+      <div class="col-md-6 col-lg-6 col-sm-6" style="background-color:#2e7d32">
       <div class="card" align="center">
         <div class="card">
           <img src="images/donatet.jpeg" style="margin-top:3px; opacity:0.95">
@@ -27,9 +27,37 @@
       </div>
       </div>
     </div>
+
+    <section id="team" class="team-section col-md-12 col-lg-12 col-sm-12" aria-labelledby="team-heading">
+      <p class="section-kicker">The people behind BloodBank</p>
+      <h2 id="team-heading">Meet Our Team</h2>
+      <p class="team-intro">A group of engineers working together to make it easier for donors and recipients to connect.</p>
+      <div class="row team-list">
+        <div class="col-sm-4 team-member">
+          <span class="team-avatar" aria-hidden="true">AB</span>
+          <h3>Aquib Baig</h3>
+        </div>
+        <div class="col-sm-4 team-member">
+          <span class="team-avatar" aria-hidden="true">AM</span>
+          <h3>Anisha Mohanty</h3>
+        </div>
+        <div class="col-sm-4 team-member">
+          <span class="team-avatar" aria-hidden="true">GP</span>
+          <h3>P. Ganesh Patro</h3>
+        </div>
+        <div class="col-sm-4 col-sm-offset-2 team-member">
+          <span class="team-avatar" aria-hidden="true">AP</span>
+          <h3>Abhijit Panda</h3>
+        </div>
+        <div class="col-sm-4 team-member">
+          <span class="team-avatar" aria-hidden="true">SM</span>
+          <h3>Siddhant Mund</h3>
+        </div>
+      </div>
+    </section>
   </div>
   <div class="container">
-    <%- include footer.ejs %>
+    <%- include('footer.ejs', { showQuotes: true }) %>
   </div>
 </section>
 <%- contentFor('body') %>

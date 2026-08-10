@@ -1,29 +1,17 @@
-<footer style="height:200px; background-color:#2B2A28">
-  <div class="col-md-3 col-lg-3 col-sm-3">
-
-  </div>
-  <div class="col-md-3 col-lg-3 col-sm-3" style="text-align:justify">
-    <br>
-    <p><span style="font-weight: bold; font-size:24px;">Designed by:</span><br><br>
-      Aquib Baig<br>
-      Anisha Mohanty<br>
-      P.Ganesh Patro<br>
-      Abhijit Panda<br>
-      Siddhant Mund</p>
-  </div>
-  <div class="col-md-3 col-lg-3 col-sm-3">
-    <br>
-    <br>
-    <br>
-    <br>
-
-      <p style="text-align:justify">College of Engineering and Engineering<br>
-       and Technology, Bhubaneswar<br>
-       Computer Science and Engineering<br><br>
-       All rights reserved.
-     </p>
-  </div>
-  <div class="col-md-3 col-lg-3 col-sm-3">
-
+<footer class="site-footer">
+  <% if (typeof showQuotes !== 'undefined' && showQuotes) { %>
+    <section class="footer-quotes" aria-labelledby="quote-heading">
+      <p class="section-kicker">A little inspiration</p>
+      <h2 id="quote-heading">Every Donation Creates Hope</h2>
+      <div class="row">
+        <blockquote class="col-sm-4">“A small act of kindness can become someone’s second chance.”</blockquote>
+        <blockquote class="col-sm-4">“Give blood today. Help a heartbeat continue tomorrow.”</blockquote>
+        <blockquote class="col-sm-4">“Together, ordinary people can do something extraordinary.”</blockquote>
+      </div>
+    </section>
+  <% } %>
+  <div class="footer-meta">
+    <p>College of Engineering and Technology, Bhubaneswar</p>
+    <p>Computer Science and Engineering &middot; All rights reserved.</p>
   </div>
 </footer>
