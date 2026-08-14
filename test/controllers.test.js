@@ -57,6 +57,34 @@ test('need controller queries matching donors and renders the selected fields', 
   });
 });
 
+test('need controller renders an empty donor list when no matches are found', function() {
+  var controller = loadWithMocks('../controller/needres', {
+    mongoose: {},
+    '../models/donors': {
+      find: function() {
+        return {
+          select: function() {},
+          exec: function(callback) {
+            callback(null, []);
+          }
+        };
+      }
+    }
+  });
+  var rendered;
+
+  controller.showData({ body: { bgr: 'AB-', place: 'Delhi' } }, {
+    render: function(view, data) {
+      rendered = { view: view, data: data };
+    }
+  });
+
+  assert.deepEqual(rendered, {
+    view: 'pages/data',
+    data: { users: [] }
+  });
+});
+
 test('need controller does not query when no blood group is supplied', function() {
   var findCalled = false;
   var controller = loadWithMocks('../controller/needres', {
