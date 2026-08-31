@@ -25,16 +25,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 // mongoose connection
-mongoose.connect('mongodb://localhost:27017/bloodb',{
-  useMongoClient: true
-});
-
-var db = mongoose.connection;
-db.once('open', function(){
-  console.log("connection to mongodb succesful..");
-}).on('error',function(error) {
-  console.log("MongoDB connection error: ", error);
-});
+mongoose.connect('mongodb://localhost:27017/bloodb')
+  .then(function() {
+    console.log('Connection to MongoDB successful.');
+  })
+  .catch(function(error) {
+    console.error('MongoDB connection error:', error.message);
+  });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
