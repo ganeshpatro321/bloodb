@@ -31,6 +31,10 @@ router.get('/learn', function(req,res){
   res.render('pages/learn');
 });
 
+router.get('/motivate', function(req,res){
+  res.render('pages/motivate');
+});
+
 router.post('/contact', contres.conUser );
 router.post('/donate', donres.donUser);
 router.post('/need', needres.showData);
