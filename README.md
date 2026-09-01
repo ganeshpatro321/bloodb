@@ -1,2 +1,2 @@
-# BloodB – Donor Network v4
+# BloodB Community
 An app to connect donors and receivers.
