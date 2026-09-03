@@ -1,2 +1,2 @@
-# BloodB Base Conflict Validation 076c2f2f
+# BloodB Bundled Delivery E2E 2
 An app to connect donors and receivers.
