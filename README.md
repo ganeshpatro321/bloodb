@@ -1,2 +1,2 @@
-# BloodB Base Conflict Validation e6afa850
+# BloodB Patch Clear E2E 2
 An app to connect donors and receivers.
