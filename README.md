@@ -1,2 +1,2 @@
-# BloodB Base Conflict Validation e6afa850
+# BloodB Base Conflict Validation 3e27373f
 An app to connect donors and receivers.
